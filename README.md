@@ -1,6 +1,6 @@
-#docker-php7-mysql-swoole安装说明
+# docker-php7-mysql-swoole安装说明
 
-##安装及启动docker
+## 安装及启动docker
 ```
     yum -y install docker
 
@@ -18,9 +18,9 @@
 ```
 
 
-##正式步骤
+## 正式步骤
 
-###docker nginx
+### docker nginx
 ```
 docker pull nginx
 docker run --name nginx-test -p 8081:80 -d nginx
@@ -60,7 +60,7 @@ docker cp 72763ce53f25:/etc/nginx/nginx.conf ~/nginx/conf #72763ce53f25容器ID
 ```
 
 
-###docker mysql
+### docker mysql
 ```
 docker pull mysql:5.7
 mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf
@@ -71,7 +71,7 @@ docker run -p 3306:3306 --name dockermysql57 -v ~/mysql/conf:/etc/mysql/conf.d -
 ```
 
 
-###docker php7.2
+### docker php7.2
 ```
 
 docker pull php:7.2-fpm
@@ -105,7 +105,7 @@ docker commit 47b5d91b1a17 davelswang/php7-mysql-swoole
 ```
 
 
-###根据新的镜像重新生成容器
+### 根据新的镜像重新生成容器
 ```
 
 docker run -p 9000:9000 --name dockerphp7 -v ~/nginx/www:/www --link dockermysql57 -d davelswang/php7-mysql-swoole
@@ -113,7 +113,7 @@ docker run -p 9000:9000 --name dockerphp7 -v ~/nginx/www:/www --link dockermysql
 ```
 
 
-###启动nginx
+### 启动nginx
 ```
 cd ~/nginx/www/
 touch index.php
@@ -134,7 +134,7 @@ docker run --name dockernginx -p 80:80 -d \
 ```
 
 
-##重启后的步骤
+## 重启后的步骤
 ```
 #启动mysql
 docker run -p 3306:3306 --name dockermysql57 -v ~/mysql/conf:/etc/mysql/conf.d -v ~/mysql/logs:/logs -v ~/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
